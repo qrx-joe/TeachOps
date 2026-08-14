@@ -1,0 +1,49 @@
+{
+  "rule_pack_id": "teachops-demo-rules",
+  "version": "v1.0.0",
+  "updated_at": "2026-08-14",
+  "applies_to": "小学数学教学设计（第二学段，数与运算主题）",
+  "description": "TeachOps 演示用规则包：规则为团队自定的检查项，独立于课程标准本身；课标条目作为证据来源由 Evidence Packet 提供。",
+  "rules": [
+    {
+      "rule_id": "R-001",
+      "name": "目标—评价一致性",
+      "statement": "每条教学目标必须至少对应一个可执行的评价任务。",
+      "scope": ["lesson.goals", "lesson.assessment"],
+      "severity": "FAIL",
+      "version": "v1.0.0"
+    },
+    {
+      "rule_id": "R-002",
+      "name": "关键理由证据化",
+      "statement": "每条关键教学设计理由必须引用 Evidence Packet 中的证据条目（evidence_id）。",
+      "scope": ["lesson.rationale"],
+      "severity": "FAIL",
+      "version": "v1.0.0"
+    },
+    {
+      "rule_id": "R-003",
+      "name": "学情误解响应",
+      "statement": "针对学情摘要中观测频率最高的错误模式，教学过程必须包含至少一个显式处理环节。",
+      "scope": ["lesson.activities", "learner_summary.misconceptions"],
+      "severity": "FAIL",
+      "version": "v1.0.0"
+    },
+    {
+      "rule_id": "R-004",
+      "name": "课标映射",
+      "statement": "每条教学目标必须映射到至少一条课程标准证据条目（curriculum item id，如 CUR-02）。",
+      "scope": ["lesson.goals", "curriculum.items"],
+      "severity": "FAIL",
+      "version": "v1.0.0"
+    },
+    {
+      "rule_id": "R-005",
+      "name": "课时结构完整",
+      "statement": "各教学环节必须标注时长，且总时长不超过 40 分钟。",
+      "scope": ["lesson.activities"],
+      "severity": "WARN",
+      "version": "v1.0.0"
+    }
+  ]
+}

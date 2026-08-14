@@ -1,0 +1,40 @@
+{
+  "synthetic": true,
+  "data_notice": "合成聚合学情：不包含任何真实学生的姓名、学号或联系方式，统计数据为演示用途虚构，仅用于 TeachOps 比赛演示。",
+  "version": "synthetic-v1",
+  "generated_at": "2026-08-14",
+  "class_profile": {
+    "grade": "三年级",
+    "subject": "数学",
+    "class_size": 42
+  },
+  "prior_knowledge": [
+    {
+      "topic": "平均分（整数分物）",
+      "mastery_rate": 0.88,
+      "source": "合成单元前测"
+    },
+    {
+      "topic": "整数读写与大小比较",
+      "mastery_rate": 0.92,
+      "source": "合成单元前测"
+    }
+  ],
+  "misconceptions": [
+    {
+      "id": "M-01",
+      "pattern": "认为分母越大分数越大（如认为 1/8 > 1/2，因为 8 > 2）",
+      "observed_frequency": "17/42",
+      "source": "合成课堂前测"
+    },
+    {
+      "id": "M-02",
+      "pattern": "未平均分也用分数表示（如把没有均分的圆也涂色称为 1/2）",
+      "observed_frequency": "9/42",
+      "source": "合成课堂前测"
+    }
+  ],
+  "observation_notes": [
+    "合成教学观察记录：三年级学生连续专注时长约 15-20 分钟，长时讲授后参与度明显下降"
+  ]
+}
