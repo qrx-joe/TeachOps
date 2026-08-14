@@ -1,0 +1,39 @@
+# ===== 密钥与本机凭据（绝不入库）=====
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+secrets/
+credentials/
+
+# ===== 含个人信息的提交材料（仅本地留存，不公开）=====
+# 官方模板受版权保护；提交回执截图含账号信息
+submission/official-templates/
+submission/receipts/
+
+# 原始截图先放这里，去除个人信息并标注证据类型后再移入 evidence/
+evidence/private/
+
+# ===== 内部规格文档（暂不入库，公开仓库保持最小结构）=====
+/*.docx
+
+# ===== 运行时与本地产物 =====
+agentteams-data/
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+dist/
+build/
+*.log
+
+# ===== 系统与编辑器 =====
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
