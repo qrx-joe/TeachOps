@@ -1,0 +1,31 @@
+{
+  "evidence_type": "fixture replay",
+  "note": "预先设计的期望输出，非真实运行结果。本样例预期在 Evidence 阶段即被阻断，Design Agent 不会被调用。",
+  "packet_id": "EP-missing-001",
+  "case": "missing-evidence-case",
+  "status": "BLOCKED",
+  "blocked_reason": "E_INPUT_MISSING",
+  "generated_at": "2026-08-14",
+  "evidence_items": [
+    {
+      "evidence_id": "EV-101",
+      "source": "learner-summary.json（synthetic）",
+      "locator": "misconceptions[0]（M-01）",
+      "summary": "'分母越大分数越大'误解，观测频率 17/42。",
+      "quote_type": "原文摘录",
+      "verify_status": "VERIFIED"
+    },
+    {
+      "evidence_id": "EV-102",
+      "source": "learner-summary.json（synthetic）",
+      "locator": "observation_notes[0]",
+      "summary": "三年级学生连续专注时长约 15-20 分钟（合成观察）。",
+      "quote_type": "原文摘录",
+      "verify_status": "VERIFIED"
+    }
+  ],
+  "missing_items": [
+    "curriculum-source.md（关键课标证据缺失：初稿引用的 CUR-01/CUR-02/CUR-03 均无来源文件支撑，无法验证）"
+  ],
+  "next_action": "补交课程标准来源文件后重新构建证据包；在此之前流程保持 BLOCKED，Design Agent 不被调用，不产出任何修订。"
+}
