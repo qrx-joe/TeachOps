@@ -49,11 +49,11 @@ demo/
 
 ## 5. 运行方式与证据类型
 
-### 当前烟雾结论（2026-08-15）
+### 当前烟雾结论（2026-08-15，下午更新）
 
 - `live` 环境核验：Docker Desktop 4.71.0、Engine 29.4.1 可用。
-- AgentTeams 烟雾测试：**未通过**。本机没有 AgentTeams 容器、镜像或 CLI，且当前进程环境没有可用的 Qwen/DashScope 模型凭据；未执行需要凭据的交互式安装。
-- 止损决定：停止 AgentTeams 排障，本仓库当前正常流程按 `fixture replay` 运行。这里没有 AgentTeams Team Room、多 Agent 消息流或模型调用的 live 证据。
+- AgentTeams 烟雾测试：**已通过（live）**。AgentTeams stable v1.1.2 完成本机安装（含 main 安装器与 v1.1.2 镜像之间五处版本错位的修复，见核验文档），烟雾测试六项——Docker、容器健康、Element Web 登录、Manager 回复、Worker 收发、Qwen 调用——全部真实通过；正式团队（manager/evidence/design/audit 四 Agent）已在线。
+- 证据边界：烟雾测试为 live，但**正常课例四产物流程（步骤 9）与异常流程（步骤 10）尚未在 AgentTeams 上运行**，本仓库正常流程产物仍按 `fixture replay` 呈现；不存在冒用 fixture 截图充当 live 的情况。
 
 详细命令与证据边界见 [`docs/agentteams-可用性核验.md`](docs/agentteams-可用性核验.md)。
 
@@ -108,7 +108,7 @@ uv run python -m unittest discover -s tests -v
 - `fixture replay`：`demo/*/expected-output/` 中的固定期望输出回放
 - `design`：方案设计，尚未实现
 
-当前仓库中 Agent Identity、Skill 契约、样例与 expected-output 为 design / fixture replay；当前只有 Docker 环境核验事实，没有 AgentTeams 正常流程的 live 证据。后续 live 证据必须按运行证据索引登记。
+当前仓库中 Agent Identity、Skill 契约、样例与 expected-output 为 design / fixture replay；烟雾测试（六项）与团队配置为 live（2026-08-15）。正常课例流程的 live 证据（四产物 + 导师审批）尚待运行，完成后必须按运行证据索引登记。
 
 ### API Key 安全
 

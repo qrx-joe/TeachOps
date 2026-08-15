@@ -1,29 +1,30 @@
 # AgentTeams 运行手册（步骤 7-10）
 
-> 状态：2026-08-15 已完成本机环境核验，但 AgentTeams 烟雾测试未通过，当前执行路径为 **fixture replay**。以下四节保留为后续 live 复验手册。
+> 状态：2026-08-15 **步骤 7 烟雾测试已全部通过（live），步骤 8 团队配置已完成（四 Agent 在线）**；步骤 9/10 待运行，当前正常流程产物仍为 fixture replay。以下各节既是已执行记录，也是后续复现手册。
 > 前置依赖（均为用户操作）：启动 Docker Desktop；安装 AgentTeams stable **v1.1.2**（官方仓库 github.com/agentscope-ai/AgentTeams）；在本机安装界面输入阿里云百炼 API Key。
 > 安全红线：API Key 只在本机输入，不发聊天、不写仓库、不进截图（截图前遮挡 Key 与个人头像/用户名）。
+> 安装注意：main 分支安装器与 v1.1.2 镜像存在环境变量前缀等版本错位，共五处修复，详见 `docs/agentteams-可用性核验.md` 第 3 节。
 
-## 步骤 7 烟雾测试（时间盒 90 分钟）
+## 步骤 7 烟雾测试（时间盒 90 分钟）✅ 已通过（2026-08-15）
 
 通过标准：Docker Server 正常 + AgentTeams 启动 + 本地 Element Web 打开 + Manager 回复一条最小消息 + 一个测试 Worker 收发任务成功 + Qwen 调用成功。
 
-记录表（完成后填写，截图先存 `evidence/private/`，脱敏后移入 `evidence/` 并登记索引）：
+记录表（截图先存 `evidence/private/`，脱敏后移入 `evidence/` 并登记索引）：
 
 | 检查项 | 结果 | 版本/说明 | 截图文件名 |
 | --- | --- | --- | --- |
-| Docker Server | ☐ | Docker Desktop 版本： | |
-| AgentTeams 安装 | ☐ | 版本（应为 v1.1.2）： | |
-| Element Web 打开 | ☐ | 本地地址： | |
-| Manager 最小回复 | ☐ | 消息时间： | |
-| 测试 Worker 收发 | ☐ | Worker 名： | |
-| Qwen 最小调用 | ☐ | 模型名： | |
+| Docker Server | ✅ | Docker Desktop 4.71.0，Engine 29.4.1 | 待归档 |
+| AgentTeams 安装 | ✅ | v1.1.2 embedded（digest a3654ff6） | 待归档 |
+| Element Web 打开 | ✅ | http://127.0.0.1:18088 | 待归档 |
+| Manager 最小回复 | ✅ | 2026-08-15，"ready! 我已经准备就绪…" | 待归档 |
+| 测试 Worker 收发 | ✅ | teachops-evidence（教学证据收集专员） | 待归档 |
+| Qwen 最小调用 | ✅ | qwen3.6-plus @ 百炼接入点 | 待归档 |
 
 **降级触发**：90 分钟未完成最小链路 → 停止排障，直接使用 `demo/*/expected-output/`（fixture replay）完成步骤 10 与 PPT，PPT 第 7/10 页标注"AgentTeams 集成未完成"。
 
-本次已触发降级：Docker Server 可用，但本机无 AgentTeams 安装且无模型凭据环境变量；未进入需要 API Key 的交互式安装。具体记录见 `docs/agentteams-可用性核验.md`。
+~~本次已触发降级~~ **2026-08-15 更新：降级已解除**——补充安装与凭据后完成安装（含五处版本错位修复，见 `docs/agentteams-可用性核验.md`），烟雾测试六项全部通过。步骤 9/10 完成前，正常流程产物保持 fixture replay 标注。
 
-## 步骤 8 正式团队配置（时间盒 90 分钟）
+## 步骤 8 正式团队配置（时间盒 90 分钟）✅ 已完成（2026-08-15）
 
 创建 4 个角色并绑定 Identity 与 Skill：
 
@@ -51,6 +52,8 @@
 - 规则包：demo/normal-case/input/rule-pack.json
 请按 Evidence → Design → Audit 流程处理，每步完成后汇报产物文件与状态。
 ```
+
+> live 实测路径（2026-08-15 已验证）：课例输入已复制到 manager 工作区（宿主机 `C:\Users\<user>\agentteams-manager\teachops-demo\normal-case\`），消息中的文件路径使用容器内形式 `/root/manager-workspace/teachops-demo/normal-case/<文件名>`。`approval-decision.json` 为 fixture 预存决定，live 流程不喂给 Manager，审批由导师真实作出。
 
 预期链路与核对点：
 
