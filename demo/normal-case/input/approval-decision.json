@@ -1,0 +1,12 @@
+{
+  "decision_id": "RD-normal-deterministic-001",
+  "evidence_type": "fixture replay",
+  "decided_by": "fixture-human-reviewer",
+  "decision": "APPROVE_WITH_CONDITION",
+  "applies_to_report_id": "AR-normal-deterministic-initial",
+  "condition": {
+    "action": "SET_ACTIVITY_DURATION",
+    "activity": "环节 4 课堂小结",
+    "minutes": 3
+  }
+}

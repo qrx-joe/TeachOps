@@ -36,7 +36,7 @@
 demo/
 ├─ 样例说明.md                     # 植入缺陷、合成标记、预期行为对照
 ├─ normal-case/
-│  ├─ input/                       # 课标来源 + 初稿 + 合成学情 + 规则包
+│  ├─ input/                       # 课标 + 初稿 + 学情 + 规则包 + 审批条件
 │  └─ expected-output/             # fixture replay：两步产物 + 审批样例
 └─ missing-evidence-case/
    ├─ input/                       # 仅缺 curriculum-source.md
@@ -53,7 +53,7 @@ demo/
 
 仓库包含一个不依赖模型、仅使用 Python 标准库的最小可运行闭环。它读取固定课例输入并执行：
 
-`Evidence → revised-lesson.md → 首轮审计 → 应用附条件批准 → final-lesson.md → 重新审计`
+`Evidence → revised-lesson.md → 首轮审计 → 读取显式 approval-decision.json → final-lesson.md → 重新审计`
 
 ```powershell
 $env:UV_CACHE_DIR='.uv-cache'
@@ -62,9 +62,10 @@ uv run python scripts/run_demo.py missing-evidence
 uv run python -m unittest discover -s tests -v
 ```
 
-- 正常路径产物：`demo/normal-case/deterministic-output/`；首轮总时长 45 分钟，R-005 为 WARN，应用“环节 4 压缩至 3 分钟”后重新审计为 40 分钟且五条规则全部 PASS。
+- 正常路径输入另含 `approval-decision.json`；产物位于 `demo/normal-case/deterministic-output/`。首轮总时长 45 分钟，R-005 为 WARN；只有审批决定与首轮报告匹配时才应用“环节 4 调整为 3 分钟”，重新审计为 40 分钟且五条规则全部 PASS。
 - 缺证据路径产物：`demo/missing-evidence-case/deterministic-output/`；流程在 Evidence 阶段返回 BLOCKED，不生成修订稿或审计报告。
 - 这些结果属于可复现的 `fixture replay`，证明本地确定性逻辑可运行；不等同于 AgentTeams、模型网关或真实用户环境的 `live` 证据。
+- 审计器验证结构化约束、有效 EV/CUR 引用、显式学情响应标记和时长字段，不代替导师对教学内容质量的语义判断。
 
 ### AgentTeams 协作运行
 

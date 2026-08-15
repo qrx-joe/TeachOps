@@ -26,6 +26,10 @@
       "name": "学情误解响应",
       "statement": "针对学情摘要中观测频率最高的错误模式，教学过程必须包含至少一个显式处理环节。",
       "scope": ["lesson.activities", "learner_summary.misconceptions"],
+      "deterministic_check": {
+        "type": "response_marker",
+        "format": "【响应学情 {source_item_id}；证据 {evidence_id}】"
+      },
       "severity": "FAIL",
       "version": "v1.0.0"
     },
@@ -42,6 +46,9 @@
       "name": "课时结构完整",
       "statement": "各教学环节必须标注时长，且总时长不超过 40 分钟。",
       "scope": ["lesson.activities"],
+      "parameters": {
+        "max_total_minutes": 40
+      },
       "severity": "WARN",
       "version": "v1.0.0"
     }

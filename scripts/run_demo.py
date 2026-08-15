@@ -27,6 +27,9 @@ def main() -> None:
         learner_summary=input_dir / "learner-summary.json",
         rule_pack=input_dir / "rule-pack.json",
         curriculum_source=input_dir / "curriculum-source.md",
+        approval_decision=(
+            input_dir / "approval-decision.json" if args.case == "normal" else None
+        ),
     )
     result = (
         run_normal_case(paths, output_dir)

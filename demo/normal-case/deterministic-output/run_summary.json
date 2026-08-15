@@ -3,6 +3,7 @@
   "generator": "teachops-demo deterministic runner",
   "case": "normal-case",
   "status": "COMPLETED",
+  "approval_decision_id": "RD-normal-deterministic-001",
   "steps": [
     "EVIDENCE_READY",
     "REVISED_LESSON_GENERATED",
@@ -14,6 +15,7 @@
     "evidence_packet.json",
     "revised-lesson.md",
     "audit_report.initial.json",
+    "approval_decision.json",
     "final-lesson.md",
     "audit_report.final.json"
   ]

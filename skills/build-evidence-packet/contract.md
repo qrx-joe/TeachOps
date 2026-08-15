@@ -65,7 +65,10 @@
           "locator": { "type": "string", "description": "来源内定位：条目号、章节或字段路径" },
           "summary": { "type": "string" },
           "quote_type": { "enum": ["原文摘录", "转述"] },
-          "verify_status": { "enum": ["VERIFIED", "UNVERIFIED"] }
+          "verify_status": { "enum": ["VERIFIED", "UNVERIFIED"] },
+          "evidence_kind": { "enum": ["curriculum", "learner_misconception", "learner_observation"] },
+          "source_item_id": { "type": "string", "description": "学情条目的真实 ID，如 M-01" },
+          "observed_frequency": { "type": "string", "pattern": "^[0-9]+/[1-9][0-9]*$" }
         }
       }
     },
@@ -83,6 +86,7 @@
 - 由 Evidence Agent 在任务进入 `EVIDENCE_BUILDING` 时调用，每案例一次，重跑需新 packet_id。
 - `curriculum_source_ref` 与 `learner_summary_ref` 指向的文件必须存在且可读。
 - 学情摘要缺少 `synthetic: true` 标记时拒绝建包（数据质量检查）。
+- 误解条目按 `observed_frequency` 比率选择最高频项，不依赖数组顺序；locator 必须使用该条目的真实 `id`。
 
 ## permissions
 

@@ -22,7 +22,7 @@
         "EV-001",
         "EV-004"
       ],
-      "explanation": "每条关键理由均引用 Evidence ID。",
+      "explanation": "每条关键理由均引用有效 Evidence ID。",
       "suggestion": ""
     },
     {
@@ -32,7 +32,7 @@
       "evidence_ids": [
         "EV-003"
       ],
-      "explanation": "已显式处理 1/2 与 1/8 的高频误解。",
+      "explanation": "已显式响应最高频误解 M-01。",
       "suggestion": ""
     },
     {
@@ -43,7 +43,7 @@
         "EV-001",
         "EV-002"
       ],
-      "explanation": "每条目标均包含 CUR 与 EV 映射。",
+      "explanation": "每条目标均包含可验证的 CUR 与 EV 映射。",
       "suggestion": ""
     },
     {

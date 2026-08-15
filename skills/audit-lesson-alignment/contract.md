@@ -82,6 +82,8 @@
 - 由 Audit Agent 在任务进入 `AUDITING` 时调用；对初稿或修订稿均可运行（修订稿为正常流程对象）。
 - 三份输入齐全才产生完整报告；否则输出 `INCOMPLETE`。
 - `NA` 判定必须写明规则不适用的原因。
+- 所有 EV 引用必须存在于 Evidence Packet；格式正确但不存在的引用按 `E_UNVERIFIED_REF` 处理。
+- R-003 的确定性检查读取 rule-pack 中的 `deterministic_check.response_marker`；R-005 上限读取 `parameters.max_total_minutes`，不得在实现中写死。
 
 ## permissions
 

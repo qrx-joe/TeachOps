@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-"""提交前预检：扫描 git 跟踪文件中的敏感信息，并核对关键材料状态。
+"""提交前预检：扫描 git 跟踪文本、核对材料并运行确定性闭环测试。
 
 用法：python scripts/preflight_check.py
-退出码 0 = 通过；1 = 发现敏感内容或材料缺失。
+退出码 0 = 通过；1 = 发现敏感内容、材料缺失或测试失败。
 """
 import os
 import re
@@ -66,7 +66,9 @@ def main():
         "agents/manager.md",
         "skills/build-evidence-packet/contract.md",
         "demo/normal-case/input/lesson-draft.md",
+        "demo/normal-case/input/approval-decision.json",
         "demo/normal-case/deterministic-output/revised-lesson.md",
+        "demo/normal-case/deterministic-output/approval_decision.json",
         "demo/normal-case/deterministic-output/audit_report.final.json",
         "demo/missing-evidence-case/deterministic-output/evidence_packet.json",
         "src/teachops_demo/pipeline.py",
