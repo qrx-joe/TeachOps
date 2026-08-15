@@ -1,0 +1,11 @@
+{
+  "evidence_type": "fixture replay",
+  "generator": "teachops-demo deterministic runner",
+  "case": "missing-evidence-case",
+  "status": "BLOCKED",
+  "stopped_after": "EVIDENCE_BUILDING",
+  "downstream_called": false,
+  "artifacts": [
+    "evidence_packet.json"
+  ]
+}

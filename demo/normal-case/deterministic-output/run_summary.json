@@ -1,0 +1,20 @@
+{
+  "evidence_type": "fixture replay",
+  "generator": "teachops-demo deterministic runner",
+  "case": "normal-case",
+  "status": "COMPLETED",
+  "steps": [
+    "EVIDENCE_READY",
+    "REVISED_LESSON_GENERATED",
+    "INITIAL_AUDIT_R005_WARN",
+    "APPROVAL_CONDITION_APPLIED",
+    "FINAL_AUDIT_PASS"
+  ],
+  "artifacts": [
+    "evidence_packet.json",
+    "revised-lesson.md",
+    "audit_report.initial.json",
+    "final-lesson.md",
+    "audit_report.final.json"
+  ]
+}

@@ -66,11 +66,28 @@ def main():
         "agents/manager.md",
         "skills/build-evidence-packet/contract.md",
         "demo/normal-case/input/lesson-draft.md",
+        "demo/normal-case/deterministic-output/revised-lesson.md",
+        "demo/normal-case/deterministic-output/audit_report.final.json",
+        "demo/missing-evidence-case/deterministic-output/evidence_packet.json",
+        "src/teachops_demo/pipeline.py",
+        "tests/test_pipeline.py",
     ]:
         ok = os.path.exists(os.path.join(ROOT, rel))
         print(f"[check] {rel}: {'存在' if ok else '缺失!'}")
         if not ok:
             problems.append(f"缺少 {rel}")
+
+    tests = subprocess.run(
+        [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+    )
+    print(f"[check] 确定性闭环自动化测试: {'通过' if tests.returncode == 0 else '失败!'}")
+    if tests.returncode != 0:
+        problems.append("确定性闭环自动化测试失败")
+        print(tests.stdout)
+        print(tests.stderr)
 
     if hits:
         print("\n[scan] 敏感内容命中：")

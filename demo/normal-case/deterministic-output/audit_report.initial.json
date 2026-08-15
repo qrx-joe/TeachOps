@@ -1,0 +1,63 @@
+{
+  "evidence_type": "fixture replay",
+  "generator": "teachops-demo deterministic runner",
+  "report_id": "AR-normal-deterministic-initial",
+  "complete": true,
+  "findings": [
+    {
+      "rule_id": "R-001",
+      "result": "PASS",
+      "location": "评价任务对应表",
+      "evidence_ids": [
+        "EV-001"
+      ],
+      "explanation": "每条目标均有非空评价任务。",
+      "suggestion": ""
+    },
+    {
+      "rule_id": "R-002",
+      "result": "PASS",
+      "location": "关键设计理由",
+      "evidence_ids": [
+        "EV-001",
+        "EV-004"
+      ],
+      "explanation": "每条关键理由均引用 Evidence ID。",
+      "suggestion": ""
+    },
+    {
+      "rule_id": "R-003",
+      "result": "PASS",
+      "location": "教学过程",
+      "evidence_ids": [
+        "EV-003"
+      ],
+      "explanation": "已显式处理 1/2 与 1/8 的高频误解。",
+      "suggestion": ""
+    },
+    {
+      "rule_id": "R-004",
+      "result": "PASS",
+      "location": "教学目标",
+      "evidence_ids": [
+        "EV-001",
+        "EV-002"
+      ],
+      "explanation": "每条目标均包含 CUR 与 EV 映射。",
+      "suggestion": ""
+    },
+    {
+      "rule_id": "R-005",
+      "result": "WARN",
+      "location": "教学过程总时长",
+      "evidence_ids": [],
+      "explanation": "共 45 分钟；上限为 40 分钟。",
+      "suggestion": "将环节 4 从 8 分钟压缩至 3 分钟后重新审计。"
+    }
+  ],
+  "overall": {
+    "has_fail": false,
+    "needs_human_decision": true,
+    "total_minutes": 45
+  }
+}

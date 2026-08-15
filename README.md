@@ -49,6 +49,25 @@ demo/
 
 ## 5. 运行方式与证据类型
 
+### 本地确定性闭环
+
+仓库包含一个不依赖模型、仅使用 Python 标准库的最小可运行闭环。它读取固定课例输入并执行：
+
+`Evidence → revised-lesson.md → 首轮审计 → 应用附条件批准 → final-lesson.md → 重新审计`
+
+```powershell
+$env:UV_CACHE_DIR='.uv-cache'
+uv run python scripts/run_demo.py normal
+uv run python scripts/run_demo.py missing-evidence
+uv run python -m unittest discover -s tests -v
+```
+
+- 正常路径产物：`demo/normal-case/deterministic-output/`；首轮总时长 45 分钟，R-005 为 WARN，应用“环节 4 压缩至 3 分钟”后重新审计为 40 分钟且五条规则全部 PASS。
+- 缺证据路径产物：`demo/missing-evidence-case/deterministic-output/`；流程在 Evidence 阶段返回 BLOCKED，不生成修订稿或审计报告。
+- 这些结果属于可复现的 `fixture replay`，证明本地确定性逻辑可运行；不等同于 AgentTeams、模型网关或真实用户环境的 `live` 证据。
+
+### AgentTeams 协作运行
+
 初赛协作运行时使用 [AgentTeams](https://github.com/agentscope-ai/AgentTeams) stable v1.1.2（Docker Desktop 环境）：
 
 1. 启动 Docker Desktop，安装 AgentTeams v1.1.2，打开本地 Element Web
@@ -75,6 +94,9 @@ demo/
 ├─ agents/          # 四个 Agent Identity
 ├─ skills/          # 三个 Skill contracts（含 JSON Schema 与正反样例）
 ├─ demo/            # 正常 + 缺证据两套输入与期望输出
+├─ src/             # 本地确定性 Evidence / 修订 / 审计流水线
+├─ tests/           # 正常与 BLOCKED 路径自动化测试
+├─ scripts/         # CLI、PPT/PDF 与提交预检脚本
 ├─ evidence/        # live 运行证据（运行后生成，见索引）
 ├─ submission/      # 作品简介、PPT 文案与提交核对材料
 └─ docs/            # 定位、方案、运行手册、证据索引

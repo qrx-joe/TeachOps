@@ -1,0 +1,31 @@
+{
+  "evidence_type": "fixture replay",
+  "generator": "teachops-demo deterministic runner",
+  "packet_id": "EP-missing-deterministic-001",
+  "case": "missing-evidence-case",
+  "status": "BLOCKED",
+  "blocked_reason": "E_INPUT_MISSING",
+  "generated_at": "2026-08-14",
+  "evidence_items": [
+    {
+      "evidence_id": "EV-101",
+      "source": "learner-summary.json（synthetic）",
+      "locator": "misconceptions[0]（M-01）",
+      "summary": "认为分母越大分数越大（如认为 1/8 > 1/2，因为 8 > 2），观测频率 17/42。",
+      "quote_type": "原文摘录",
+      "verify_status": "VERIFIED"
+    },
+    {
+      "evidence_id": "EV-102",
+      "source": "learner-summary.json（synthetic）",
+      "locator": "observation_notes[0]",
+      "summary": "合成教学观察记录：三年级学生连续专注时长约 15-20 分钟，长时讲授后参与度明显下降",
+      "quote_type": "原文摘录",
+      "verify_status": "VERIFIED"
+    }
+  ],
+  "missing_items": [
+    "curriculum-source.md（关键课标证据缺失，无法验证 CUR 引用）"
+  ],
+  "next_action": "补交课程标准来源文件后重跑；不得调用修订步骤。"
+}
