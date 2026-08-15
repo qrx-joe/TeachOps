@@ -1,0 +1,54 @@
+{
+  "evidence_type": "fixture replay",
+  "note": "预先设计的期望输出（对候选修订 REV-normal-001 的审计），非真实运行结果。",
+  "report_id": "AR-normal-001",
+  "candidate": "revision.md（REV-normal-001）",
+  "complete": true,
+  "findings": [
+    {
+      "rule_id": "R-001",
+      "result": "PASS",
+      "location": "评价任务对应表",
+      "evidence_ids": ["EV-001"],
+      "explanation": "目标 3 已改写并补充评价任务 C，三条目标均有对应评价任务。",
+      "suggestion": ""
+    },
+    {
+      "rule_id": "R-002",
+      "result": "PASS",
+      "location": "关键设计理由 2",
+      "evidence_ids": ["EV-004"],
+      "explanation": "理由 2 已引用 EV-004 并限定为合成观察结论；理由 1 引用 CUR-02。",
+      "suggestion": ""
+    },
+    {
+      "rule_id": "R-003",
+      "result": "PASS",
+      "location": "环节 3 新增辨析活动",
+      "evidence_ids": ["EV-003"],
+      "explanation": "已针对最高频误解 M-01（17/42）设计显式辨析环节。",
+      "suggestion": ""
+    },
+    {
+      "rule_id": "R-004",
+      "result": "PASS",
+      "location": "教学目标 1-3",
+      "evidence_ids": ["EV-001"],
+      "explanation": "三条目标均映射 CUR-02。",
+      "suggestion": ""
+    },
+    {
+      "rule_id": "R-005",
+      "result": "WARN",
+      "location": "教学过程总时长",
+      "evidence_ids": [],
+      "explanation": "新增辨析活动后总时长 45 分钟，超过 40 分钟上限。",
+      "suggestion": "可将环节 4 小结压缩至 3 分钟（总时长回到 40 分钟），或将辨析活动并入环节 3 替换部分涂色时间。属时长裁量问题，转导师决定。"
+    }
+  ],
+  "overall": {
+    "has_fail": false,
+    "needs_human_decision": true,
+    "note": "无 FAIL 项；R-005 为 WARN，需导师在'压缩时长后重审'与'接受 45 分钟方案'之间作出决定。"
+  }
+}

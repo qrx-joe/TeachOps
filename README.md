@@ -49,6 +49,32 @@ demo/
 
 ## 5. 运行方式与证据类型
 
+### 当前烟雾结论（2026-08-15）
+
+- `live` 环境核验：Docker Desktop 4.71.0、Engine 29.4.1 可用。
+- AgentTeams 烟雾测试：**未通过**。本机没有 AgentTeams 容器、镜像或 CLI，且当前进程环境没有可用的 Qwen/DashScope 模型凭据；未执行需要凭据的交互式安装。
+- 止损决定：停止 AgentTeams 排障，本仓库当前正常流程按 `fixture replay` 运行。这里没有 AgentTeams Team Room、多 Agent 消息流或模型调用的 live 证据。
+
+详细命令与证据边界见 [`docs/agentteams-可用性核验.md`](docs/agentteams-可用性核验.md)。
+
+### 最小正常流程：fixture replay
+
+以下命令校验四个 fixture 的来源标记、Evidence ID 引用、审计与人工审批关联，然后只产出四个指定文件：
+
+```powershell
+$env:UV_CACHE_DIR='.uv-cache'
+uv run python scripts/replay_fixture.py
+```
+
+默认输出目录：`demo/normal-case/fixture-replay-output/`
+
+- `evidence_packet.json`
+- `revision.md`
+- `audit_report.json`
+- `review_decision.md`
+
+命令输出中的 `evidence_type` 必须为 `fixture replay`，`live_agentteams_run` 必须为 `false`。若任何 fixture 被误标为 `live`、引用不存在的 Evidence ID，或审批记录未绑定本次审计报告，命令会失败。
+
 ### 本地确定性闭环
 
 仓库包含一个不依赖模型、仅使用 Python 标准库的最小可运行闭环。它读取固定课例输入并执行：
@@ -82,7 +108,7 @@ uv run python -m unittest discover -s tests -v
 - `fixture replay`：`demo/*/expected-output/` 中的固定期望输出回放
 - `design`：方案设计，尚未实现
 
-当前仓库中 Agent Identity、Skill 契约、样例与 expected-output 为 design / fixture replay；live 证据以运行证据索引的登记为准。
+当前仓库中 Agent Identity、Skill 契约、样例与 expected-output 为 design / fixture replay；当前只有 Docker 环境核验事实，没有 AgentTeams 正常流程的 live 证据。后续 live 证据必须按运行证据索引登记。
 
 ### API Key 安全
 
@@ -102,6 +128,14 @@ uv run python -m unittest discover -s tests -v
 ├─ submission/      # 作品简介、PPT 文案与提交核对材料
 └─ docs/            # 定位、方案、运行手册、证据索引
 ```
+
+截图与产物如何命名、脱敏和留存，见 [`docs/截图与产物留存清单.md`](docs/截图与产物留存清单.md)。
+
+持续协作与工程规范入口：
+
+- [`docs/任务与协作记录.md`](docs/任务与协作记录.md)：Question、To do、Next to do、人与 AI 的关键协作决定、建议、不确定性与遗漏项。
+- [`docs/技术选型与工程规范.md`](docs/技术选型与工程规范.md)：当前实现与目标架构边界、同类框架参考、行业规范、扩展维护、测试和详细注释规则。
+- [`研序_TeachOps_技术实施与工程规范_V1.1.docx`](研序_TeachOps_技术实施与工程规范_V1.1.docx)：完整目标架构与工程规范正文；其中未落地部分仍属于 `design`。
 
 ## 7. 初赛不做（复赛计划）
 

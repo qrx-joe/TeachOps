@@ -67,12 +67,19 @@ def main():
         "skills/build-evidence-packet/contract.md",
         "demo/normal-case/input/lesson-draft.md",
         "demo/normal-case/input/approval-decision.json",
+        "demo/normal-case/fixture-replay-output/evidence_packet.json",
+        "demo/normal-case/fixture-replay-output/revision.md",
+        "demo/normal-case/fixture-replay-output/audit_report.json",
+        "demo/normal-case/fixture-replay-output/review_decision.md",
         "demo/normal-case/deterministic-output/revised-lesson.md",
         "demo/normal-case/deterministic-output/approval_decision.json",
         "demo/normal-case/deterministic-output/audit_report.final.json",
         "demo/missing-evidence-case/deterministic-output/evidence_packet.json",
         "src/teachops_demo/pipeline.py",
+        "src/teachops_demo/fixture_replay.py",
+        "scripts/replay_fixture.py",
         "tests/test_pipeline.py",
+        "tests/test_fixture_replay.py",
     ]:
         ok = os.path.exists(os.path.join(ROOT, rel))
         print(f"[check] {rel}: {'存在' if ok else '缺失!'}")

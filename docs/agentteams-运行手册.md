@@ -1,6 +1,6 @@
 # AgentTeams 运行手册（步骤 7-10）
 
-> 状态：模板就绪，**等待用户执行**。以下四节分别对应执行方案的步骤 7/8/9/10。
+> 状态：2026-08-15 已完成本机环境核验，但 AgentTeams 烟雾测试未通过，当前执行路径为 **fixture replay**。以下四节保留为后续 live 复验手册。
 > 前置依赖（均为用户操作）：启动 Docker Desktop；安装 AgentTeams stable **v1.1.2**（官方仓库 github.com/agentscope-ai/AgentTeams）；在本机安装界面输入阿里云百炼 API Key。
 > 安全红线：API Key 只在本机输入，不发聊天、不写仓库、不进截图（截图前遮挡 Key 与个人头像/用户名）。
 
@@ -20,6 +20,8 @@
 | Qwen 最小调用 | ☐ | 模型名： | |
 
 **降级触发**：90 分钟未完成最小链路 → 停止排障，直接使用 `demo/*/expected-output/`（fixture replay）完成步骤 10 与 PPT，PPT 第 7/10 页标注"AgentTeams 集成未完成"。
+
+本次已触发降级：Docker Server 可用，但本机无 AgentTeams 安装且无模型凭据环境变量；未进入需要 API Key 的交互式安装。具体记录见 `docs/agentteams-可用性核验.md`。
 
 ## 步骤 8 正式团队配置（时间盒 90 分钟）
 
