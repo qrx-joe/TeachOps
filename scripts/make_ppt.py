@@ -7,6 +7,7 @@
 live 截图占位框在步骤 8/9/10 运行后替换为真实截图，并更新证据索引。
 """
 import os
+import struct
 
 from pptx import Presentation
 from pptx.dml.color import RGBColor
@@ -133,6 +134,31 @@ def placeholder(slide, x, y, w, h, label):
     p.alignment = PP_ALIGN.CENTER
     _run(p, label, 12.5, True, ACCENT)
     return shp
+
+
+def _png_size(path):
+    """解析 PNG IHDR 得到 (width, height)，避免引入 PIL 依赖。"""
+    with open(path, "rb") as fh:
+        if fh.read(8) != b"\x89PNG\r\n\x1a\n":
+            raise ValueError(f"不是 PNG 文件：{path}")
+        while True:
+            length = struct.unpack(">I", fh.read(4))[0]
+            ctype = fh.read(4)
+            if ctype == b"IHDR":
+                return struct.unpack(">II", fh.read(8))
+            fh.seek(length + 4, 1)  # data + crc
+
+
+def live_evidence(slide, x, y, w, h, img_rel, caption):
+    """在 (x,y,w,h) 内按原比例插入一张 live 截图，右侧放证据说明文字。"""
+    img = os.path.join(ROOT, img_rel)
+    iw, ih = _png_size(img)
+    scale = min(w / iw, h / ih)
+    pw, ph = iw * scale, ih * scale
+    slide.shapes.add_picture(img, Inches(x), Inches(y), Inches(pw), Inches(ph))
+    text_block(slide, x + pw + 0.22, y + 0.05, w - pw - 0.3, h, [
+        (caption, 11.5, False, GRAY, PP_ALIGN.LEFT),
+    ])
 
 
 def style_table(tbl, widths, header_cells, body_rows, body_size=11.5):
@@ -269,7 +295,7 @@ def build():
 
     # ---------- P4 端到端闭环 ----------
     s = new_slide(prs)
-    header(s, "端到端闭环", "证据 → 修订 → 稽核 → 人工批准，一条流水线四道关卡。")
+    header(s, "端到端闭环", "证据 → 修订 → 稽核 → 人工批准，一条流水线四道关卡。", tag="live")
     steps = [
         ("提交课例（导师）", PRIMARY),
         ("Evidence 建包\nREADY / BLOCKED", PRIMARY),
@@ -301,7 +327,13 @@ def build():
     text_block(s, 0.55, 3.95, 12.2, 0.5, [
         ("人工边界：正式通过只能由导师决定，Agent 无发布权；BLOCKED 时流程停止并给出补证清单。", 12.5, True, DARK, PP_ALIGN.LEFT),
     ])
-    placeholder(s, 0.55, 4.6, 12.2, 2.1, "【live 截图占位】AgentTeams Team Room 协作记录 —— 步骤 9 运行后替换（当前为 design 流程图）")
+    live_evidence(
+        s, 0.55, 4.6, 12.2, 2.05,
+        "evidence/live-05-normal-case-kickoff.png",
+        "live 截图（2026-08-16）：AgentTeams Team Room 协作记录，\n"
+        "Evidence → Design → Audit 全流程由四 Agent 真实协作完成，\n"
+        "产物见 demo/normal-case/live-output/。",
+    )
     footer(s, 4)
 
     # ---------- P5 四个 Agent Identity ----------
@@ -346,7 +378,7 @@ def build():
 
     # ---------- P7 AgentTeams 映射 ----------
     s = new_slide(prs)
-    header(s, "AgentTeams 映射", "Manager + 三个 Worker 落在 AgentTeams Team Room，上下文只传文件引用和短状态。")
+    header(s, "AgentTeams 映射", "Manager + 三个 Worker 落在 AgentTeams Team Room，上下文只传文件引用和短状态。", tag="live")
     tbl = s.shapes.add_table(7, 2, Inches(0.55), Inches(1.9), Inches(12.2), Inches(3.3)).table
     style_table(
         tbl,
@@ -362,12 +394,17 @@ def build():
         ],
         body_size=11,
     )
-    placeholder(s, 0.55, 5.45, 12.2, 1.35, "【live 截图占位】团队配置与 Team Room 成员 —— 步骤 8 完成后替换")
+    live_evidence(
+        s, 0.55, 5.45, 12.2, 1.3,
+        "evidence/live-04-team-worker-created.png",
+        "live 截图（2026-08-15）：manager / evidence / design / audit\n"
+        "四 Agent 团队配置与 Team Room 成员在线。",
+    )
     footer(s, 7)
 
     # ---------- P8 缺证据异常分支 ----------
     s = new_slide(prs)
-    header(s, "缺证据异常分支", "缺关键课标证据 → BLOCKED → 不生成修订 → 导师收到补证清单。")
+    header(s, "缺证据异常分支", "缺关键课标证据 → BLOCKED → 不生成修订 → 导师收到补证清单。", tag="live")
     steps8 = [
         ("① 异常样例 missing-evidence-case", "与正常样例唯一差异：删除 curriculum-source.md（关键课标证据）"),
         ("② Evidence Agent 返回 BLOCKED", "status: BLOCKED + missing_items，不产出 READY 证据包"),
@@ -397,7 +434,13 @@ def build():
         p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
         p.space_after = Pt(6)
         _run(p, t, sz, b, col)
-    placeholder(s, 0.55, 5.25, 12.2, 1.5, "【live 截图占位】BLOCKED 运行记录 —— 步骤 10 运行后替换；未跑通时引用 fixture 并如实标注")
+    live_evidence(
+        s, 0.55, 5.25, 12.2, 1.45,
+        "evidence/live-09-missing-evidence-blocked.png",
+        "live 截图（2026-08-16）：缺 curriculum-source.md 时 Evidence Agent\n"
+        "返回 BLOCKED（E_INPUT_MISSING + 缺失清单），Manager 停止、\n"
+        "不调用 Design/Audit；记录见 BLOCKED-record.md。",
+    )
     footer(s, 8)
 
     # ---------- P9 开放与安全边界 ----------
@@ -452,7 +495,7 @@ def build():
     tf.vertical_anchor = MSO_ANCHOR.MIDDLE
     p = tf.paragraphs[0]
     _run(p, "AgentTeams 运行状态：", 12.5, True, ACCENT)
-    _run(p, "烟雾测试与两条链路运行进行中，live 证据以 docs/运行证据索引.md 登记为准；未跑通部分以 fixture replay / design 如实呈现。", 12, False, DARK)
+    _run(p, "烟雾测试（2026-08-15）与正常 / 异常两条业务流程（2026-08-16）均已 live 完成；live 证据见 docs/运行证据索引.md 第 13/14 项与 L1-L5。", 12, False, DARK)
     c = card(s, 0.55, 4.0, 5.9, 2.4)
     tf = c.text_frame
     tf.margin_left = tf.margin_right = Inches(0.2)
