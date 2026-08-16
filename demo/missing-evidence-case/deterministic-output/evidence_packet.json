@@ -32,5 +32,5 @@
   "missing_items": [
     "curriculum-source.md（关键课标证据缺失，无法验证 CUR 引用）"
   ],
-  "next_action": "补交课程标准来源文件后重跑；不得调用修订步骤。"
+  "next_action": "补交缺失的 Evidence 输入文件后重跑；不得调用修订与审计步骤。"
 }

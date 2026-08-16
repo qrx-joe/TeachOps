@@ -219,6 +219,68 @@ class PipelineTest(unittest.TestCase):
                 )
             self.assertEqual(user_file.read_text(encoding="utf-8"), "user-owned")
 
+    def test_missing_curriculum_returns_blocked_packet(self) -> None:
+        paths = replace(
+            self.paths_for("normal-case"),
+            curriculum_source=ROOT / "does-not-exist-curriculum.md",
+        )
+        packet = build_evidence_packet(paths)
+        self.assertEqual(packet["status"], "BLOCKED")
+        self.assertEqual(packet["blocked_reason"], "E_INPUT_MISSING")
+        self.assertTrue(
+            any("curriculum-source" in item for item in packet["missing_items"])
+        )
+        # 学情侧仍可整理，保留备查；但绝不 READY。
+        self.assertEqual(
+            [item["evidence_id"] for item in packet["evidence_items"]],
+            ["EV-101", "EV-102"],
+        )
+
+    def test_missing_learner_returns_blocked_packet(self) -> None:
+        paths = replace(
+            self.paths_for("normal-case"),
+            learner_summary=ROOT / "does-not-exist-learner.json",
+        )
+        packet = build_evidence_packet(paths)
+        self.assertEqual(packet["status"], "BLOCKED")
+        self.assertEqual(packet["blocked_reason"], "E_INPUT_MISSING")
+        self.assertTrue(
+            any("learner-summary" in item for item in packet["missing_items"])
+        )
+        self.assertEqual(packet["evidence_items"], [])
+
+    def test_both_evidence_inputs_missing_lists_each_item(self) -> None:
+        paths = replace(
+            self.paths_for("normal-case"),
+            curriculum_source=ROOT / "missing-curriculum.md",
+            learner_summary=ROOT / "missing-learner.json",
+        )
+        packet = build_evidence_packet(paths)
+        self.assertEqual(packet["status"], "BLOCKED")
+        listed = " ".join(packet["missing_items"])
+        self.assertIn("curriculum-source", listed)
+        self.assertIn("learner-summary", listed)
+
+    def test_invalid_learner_json_raises_data_quality_not_missing(self) -> None:
+        paths = self.paths_for("normal-case")
+        with tempfile.TemporaryDirectory() as temp_dir:
+            bad = Path(temp_dir) / "learner-summary.json"
+            bad.write_text("{ not valid json", encoding="utf-8")
+            with self.assertRaisesRegex(PipelineError, "E_DATA_QUALITY"):
+                build_evidence_packet(replace(paths, learner_summary=bad))
+
+    def test_learner_without_synthetic_marker_still_rejected(self) -> None:
+        paths = self.paths_for("normal-case")
+        learner = json.loads(paths.learner_summary.read_text(encoding="utf-8"))
+        del learner["synthetic"]
+        with tempfile.TemporaryDirectory() as temp_dir:
+            learner_path = Path(temp_dir) / "learner-summary.json"
+            learner_path.write_text(
+                json.dumps(learner, ensure_ascii=False), encoding="utf-8"
+            )
+            with self.assertRaisesRegex(PipelineError, "E_DATA_QUALITY"):
+                build_evidence_packet(replace(paths, learner_summary=learner_path))
+
 
 if __name__ == "__main__":
     unittest.main()

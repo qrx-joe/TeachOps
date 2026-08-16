@@ -35,7 +35,8 @@ def _read_json(path: Path) -> dict[str, Any]:
     except FileNotFoundError as exc:
         raise PipelineError(f"缺少必需输入：{path}") from exc
     except json.JSONDecodeError as exc:
-        raise PipelineError(f"JSON 无法解析：{path}: {exc}") from exc
+        # 文件存在但内容非法属于数据质量问题，不属于"文件缺失"，不得误报为 BLOCKED。
+        raise PipelineError(f"E_DATA_QUALITY：JSON 无法解析：{path}: {exc}") from exc
 
 
 def _write_json(path: Path, data: dict[str, Any]) -> None:
@@ -149,15 +150,44 @@ def _learner_evidence(
     ]
 
 
-def build_evidence_packet(paths: PipelinePaths) -> dict[str, Any]:
-    """Build a READY packet, or a BLOCKED packet when curriculum is missing."""
+def _missing_evidence_inputs(paths: PipelinePaths) -> list[str]:
+    """列出全部缺失的必需 Evidence 输入，逐项返回而非用泛化错误掩盖。
 
-    learner_summary = _read_json(paths.learner_summary)
-    _require_synthetic(learner_summary)
-    fixture_date = str(learner_summary.get("generated_at", "unknown"))
-
+    Skill Contract 要求 Manager 和导师能针对每个缺失文件行动，因此每个缺失
+    文件单独成条；文件存在但内容非法时由调用方继续走 E_DATA_QUALITY，
+    不在这里误报为"缺失"。
+    """
+    missing: list[str] = []
     if not paths.curriculum_source.is_file():
-        packet = {
+        missing.append("curriculum-source.md（关键课标证据缺失，无法验证 CUR 引用）")
+    if not paths.learner_summary.is_file():
+        missing.append("learner-summary.json（合成聚合学情缺失，无法生成学情侧证据）")
+    return missing
+
+
+def build_evidence_packet(paths: PipelinePaths) -> dict[str, Any]:
+    """Build a READY packet, or a BLOCKED packet when Evidence inputs are missing.
+
+    契约：课标或学情文件缺失/不可读时返回 status=BLOCKED 并逐项列出
+    missing_items；文件存在但 JSON 非法或缺少 synthetic 标记时抛 E_DATA_QUALITY，
+    不得误报为文件缺失。BLOCKED 产物不得进入修订与审计步骤。
+    """
+
+    missing = _missing_evidence_inputs(paths)
+    learner_items: list[dict[str, Any]] = []
+    learner_summary: dict[str, Any] | None = None
+    fixture_date = "unknown"
+    if paths.learner_summary.is_file():
+        learner_summary = _read_json(paths.learner_summary)
+        _require_synthetic(learner_summary)
+        fixture_date = str(learner_summary.get("generated_at", "unknown"))
+        if missing:
+            # BLOCKED 时保留已能整理的学情条目备查（契约允许），
+            # 但 status 必须为 BLOCKED，下游一律不得引用。
+            learner_items = _learner_evidence(learner_summary, id_offset=98)
+
+    if missing:
+        return {
             "evidence_type": "fixture replay",
             "generator": "teachops-demo deterministic runner",
             "packet_id": "EP-missing-deterministic-001",
@@ -165,14 +195,12 @@ def build_evidence_packet(paths: PipelinePaths) -> dict[str, Any]:
             "status": "BLOCKED",
             "blocked_reason": "E_INPUT_MISSING",
             "generated_at": fixture_date,
-            "evidence_items": _learner_evidence(learner_summary, id_offset=98),
-            "missing_items": [
-                "curriculum-source.md（关键课标证据缺失，无法验证 CUR 引用）"
-            ],
-            "next_action": "补交课程标准来源文件后重跑；不得调用修订步骤。",
+            "evidence_items": learner_items,
+            "missing_items": missing,
+            "next_action": "补交缺失的 Evidence 输入文件后重跑；不得调用修订与审计步骤。",
         }
-        return packet
 
+    # missing 为空 ⇒ 两个 Evidence 输入都存在且已解析为合法学情。
     curriculum = paths.curriculum_source.read_text(encoding="utf-8")
     required_markers = ("CUR-01", "CUR-02")
     missing_markers = [marker for marker in required_markers if marker not in curriculum]
