@@ -1,0 +1,35 @@
+{
+  "evidence_packet_id": "missing-evidence-case-live-20260816b-ep-v1",
+  "case_id": "missing-evidence-case-live-20260816b",
+  "task_id": "teachops-evidence-003",
+  "evidence_type": "live",
+  "status": "BLOCKED",
+  "blocked_reason": "E_INPUT_MISSING",
+  "missing_items": [
+    {
+      "item": "curriculum-source.md",
+      "role": "课标证据来源文件，包含 CUR-* 证据条目",
+      "impact": "无法提取课程标准证据条目，无法构建 curriculum_items 和 cross_map，导致 Design 阶段的规则 R-002（关键理由证据化）和 R-004（课标映射）无法执行"
+    }
+  ],
+  "available_inputs": [
+    "lesson-draft.md",
+    "learner-summary.json",
+    "rule-pack.json"
+  ],
+  "partial_analysis": {
+    "lesson_draft_goals_found": 3,
+    "lesson_draft_goals_missing_curriculum_refs": [
+      {
+        "goal_number": 3,
+        "goal_text": "在小组合作交流中发展数感和合作意识",
+        "issue": "教学设计初稿中目标 3 未标注课标条目引用（CUR-*）"
+      }
+    ],
+    "learner_misconceptions_found": 2,
+    "rule_pack_rules": 5
+  },
+  "next_action": "等待管理员或 Coordinator 补充 curriculum-source.md 至本任务目录后重新执行。当前不可进入 Design 或 Audit 阶段。",
+  "design_audit_hold": "Design 和 Audit 阶段不得在本任务被 BLOCKED 期间调用，直至 curriculum-source.md 被提供且 Evidence Packet 重建为 status: COMPLETE 为止。",
+  "generated_at": "2026-08-16T09:13:00Z"
+}

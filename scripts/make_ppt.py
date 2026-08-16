@@ -331,8 +331,8 @@ def build():
         s, 0.55, 4.6, 12.2, 2.05,
         "evidence/live-05-normal-case-kickoff.png",
         "live 截图（2026-08-16）：AgentTeams Team Room 协作记录，\n"
-        "Evidence → Design → Audit 全流程由四 Agent 真实协作完成，\n"
-        "产物见 demo/normal-case/live-output/。",
+        "Evidence → Design → Audit → 导师审批真实完成；脱敏记录、\n"
+        "真实产物与哈希见 evidence/live-10~16、live-19、live-21。",
     )
     footer(s, 4)
 
@@ -425,11 +425,11 @@ def build():
     tf.margin_left = tf.margin_right = Inches(0.2)
     tf.margin_top = Inches(0.16)
     for i, (t, sz, b, col) in enumerate([
-        ("fixture replay 回放", 13, True, PRIMARY),
+        ("fixture replay 对照（非 live）", 13, True, PRIMARY),
         ("demo/missing-evidence-case/expected-output/", 11, False, DARK),
         ("evidence_packet.json", 11, False, DARK),
-        ("内容：BLOCKED + 缺失项清单 + next_action", 11.5, False, DARK),
-        ("约定：不制作仿真的 AgentTeams 聊天截图", 11.5, False, ACCENT),
+        ("用途：结构化基线与自动校验", 11.5, False, DARK),
+        ("边界：不得替代 evidence/live-17 的 live 产物", 11.5, False, ACCENT),
     ]):
         p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
         p.space_after = Pt(6)
@@ -437,9 +437,9 @@ def build():
     live_evidence(
         s, 0.55, 5.25, 12.2, 1.45,
         "evidence/live-09-missing-evidence-blocked.png",
-        "live 截图（2026-08-16）：缺 curriculum-source.md 时 Evidence Agent\n"
-        "返回 BLOCKED（E_INPUT_MISSING + 缺失清单），Manager 停止、\n"
-        "不调用 Design/Audit；记录见 BLOCKED-record.md。",
+        "live 截图（2026-08-16）：Evidence Agent 返回 BLOCKED；\n"
+        "结构化补跑已落盘 live-17，Manager 核验后停止，\n"
+        "未调用 Design/Audit；脱敏记录见 evidence/live-20。",
     )
     footer(s, 8)
 
@@ -481,7 +481,7 @@ def build():
 
     # ---------- P10 当前进展、限制和复赛计划 ----------
     s = new_slide(prs)
-    header(s, "当前进展、限制和复赛计划", "初赛交付材料齐备，未做的事项明确列出，复赛路线可检验。")
+    header(s, "当前进展、限制和复赛计划", "初赛交付材料齐备，未做的事项明确列出，复赛路线可检验。", tag="live/design")
     c = card(s, 0.55, 1.9, 12.2, 0.95, fill=LIGHT)
     tf = c.text_frame
     tf.margin_left = Inches(0.2)
@@ -495,7 +495,7 @@ def build():
     tf.vertical_anchor = MSO_ANCHOR.MIDDLE
     p = tf.paragraphs[0]
     _run(p, "AgentTeams 运行状态：", 12.5, True, ACCENT)
-    _run(p, "烟雾测试（2026-08-15）与正常 / 异常两条业务流程（2026-08-16）均已 live 完成；live 证据见 docs/运行证据索引.md 第 13/14 项与 L1-L5。", 12, False, DARK)
+    _run(p, "烟雾测试（2026-08-15）与正常 / 异常业务链路（2026-08-16）均已 live 完成；索引第 13-16 项与 L1-L5。fixture replay 仅作对照。", 12, False, DARK)
     c = card(s, 0.55, 4.0, 5.9, 2.4)
     tf = c.text_frame
     tf.margin_left = tf.margin_right = Inches(0.2)

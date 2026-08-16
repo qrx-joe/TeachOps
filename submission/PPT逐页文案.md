@@ -89,8 +89,7 @@
 | 状态追踪 | 房间消息、Agent 状态、产物状态字段 |
 | 人工审批 | 用户在 Team Room 中批准 / 驳回 |
 
-证据：映射表（design）。
-截图占位：【live：团队配置与房间成员——步骤 8 完成后补】
+证据：映射表（design）+ `evidence/live-04-team-worker-created.png`（live）。
 
 ## P8 缺证据异常分支
 
@@ -101,8 +100,7 @@
 - Manager 停止调用 Design Agent，房间展示停止原因
 - 不用模型记忆补写来源，不把部分执行显示成成功
 
-证据：
-截图占位：【live：BLOCKED 运行记录——步骤 10 运行后补；未跑通时用 `demo/missing-evidence-case/expected-output/evidence_packet.json` 并标注 fixture replay】
+证据：`evidence/live-09-missing-evidence-blocked.png`（live 房间截图）、`evidence/live-17-missing-evidence-packet.json`（live 结构化产物）、`evidence/live-20-missing-evidence-team-room-transcript.md`（live 脱敏协作/停止记录）。`demo/missing-evidence-case/expected-output/evidence_packet.json` 仅为 fixture replay 对照，不替代 live。
 
 ## P9 开放与安全边界
 
@@ -121,7 +119,7 @@
 **结论行：初赛交付材料齐备，未做的事项明确列出，复赛路线可检验。**
 
 - 已完成：四个 Agent Identity、三个 Skill 契约、两套固定样例、500 字简介、本 PPT（制作时按当时实际状态更新）
-- AgentTeams 运行状态：制作时按实际填写（live 已跑通两条链路 / 未跑通则写"集成未完成，材料以 fixture 与 design 呈现"）
+- AgentTeams 运行状态：烟雾测试与正常/异常两条业务链路均已 live 完成；索引第 13-16 项与 L1-L5。fixture replay 仅作对照
 - 限制：无真实导师 / 学生数据；单一课例；AgentTeams 未在本机长期验证
 - 复赛计划：Web 工作台、FastAPI + PostgreSQL、版本 Diff 与回滚、知识库 RAG / MCP Adapter、真实导师反馈（1-3 人）
 

@@ -64,7 +64,7 @@
 
 **停止条件**：流程与边界正确即停止，不追求更好文案。第 2 轮结束仍不完整 → 冻结已获得的部分产物，其余用 fixture 补齐并如实标注。
 
-**2026-08-16 执行结果（live，第 1 轮完成）**：四产物齐备并存于 `demo/normal-case/live-output/`——evidence-packet.json（CUR-01~03 + 10 条交叉映射）、lesson-revised.md + design-review-notes.md（四类问题修订清单）、audit-report.json（R-001/002/004 PASS，R-003 FAIL：M-01 错误模式未显式处理，R-005 WARN：40 分钟贴上限）、review-decision.md（导师附条件批准：M-01 处理环节实施前补入环节三）。live 审计比 fixture 判定更严格（R-003 FAIL），证明审计环节真实独立。执行过程中修复的协作链路问题（Worker 侧任务文件分发依赖 shared/tasks/ 目录与人工同步触发）记录于任务协作记录。
+**2026-08-16 执行结果（live，第 1 轮完成）**：四产物齐备并存于 `demo/normal-case/live-output/`——evidence-packet.json（CUR-01~03 + 10 条交叉映射）、lesson-revised.md + design-review-notes.md（四类问题修订清单）、audit-report.json（R-001/002/004 PASS，R-003 FAIL：教学内容已回应 M-01/M-02，但缺少机器可验证响应标记；R-005 WARN：40 分钟贴上限）、review-decision.md（导师附条件批准：实施前补入 M-01 响应标记）。live 审计比 fixture 判定更严格，证明审计环节真实独立。脱敏房间记录、原始/可解析产物与哈希见 `evidence/live-10-*` 至 `live-16-*`、`live-19-*`、`live-21-*`。
 
 ## 步骤 10 缺证据异常流程（时间盒 60 分钟）✅ 已完成（2026-08-16，live）
 
@@ -75,6 +75,8 @@ AgentTeams 可用时，把消息模板中的目录换为 `demo/missing-evidence-
 3. 房间展示补证要求，等待用户补交
 
 AgentTeams 不可用时：直接引用 `demo/missing-evidence-case/expected-output/evidence_packet.json`，PPT 与 README 标注 `fixture replay`，**不制作仿真的聊天截图**。
+
+**2026-08-16 执行结果（live）**：原始房间运行已返回 BLOCKED 并由 Manager 停止；结构化补跑进一步落盘 `evidence/live-17-missing-evidence-packet.json`。补跑中首次 Worker 模型调用返回 403，重试恢复后成功；Manager 核验 JSON 后在 Matrix 房间确认 Design/Audit 未调用。完整脱敏记录见 `evidence/live-20-missing-evidence-team-room-transcript.md`。fixture 仍仅作结构对照。
 
 ## 证据归档规则
 

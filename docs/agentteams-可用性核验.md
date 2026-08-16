@@ -1,7 +1,7 @@
 # AgentTeams 本机可用性核验
 
 > 核验日期：2026-08-15（Asia/Shanghai）
-> 结论：AgentTeams stable **v1.1.2 已完成本机安装，烟雾测试 6 项全部通过（live）**；正常课例四产物流程尚未运行，正常流程证据仍为 `fixture replay`。
+> 结论：AgentTeams stable **v1.1.2 已完成本机安装，烟雾测试 6 项全部通过（live）**；正常课例与缺证据业务链路均已于 2026-08-16 live 完成。历史成功不等同于外部模型服务持续在线，当前状态仍需运行时核验。
 
 ## 1. 环境与安装核验结果
 
@@ -42,7 +42,7 @@
 
 - 烟雾测试（第 2 节六项）：**live**（2026-08-15）。
 - 正常课例流程（Evidence → Design → Audit 四产物 + 导师审批）：**live 完成**（2026-08-16，产物在 `demo/normal-case/live-output/`）。
-- 异常流程（缺证据 BLOCKED 链路）：**live 完成**（2026-08-16，BLOCKED 报告 + Manager 停止 + 未调用设计/审计；截图 `evidence/live-09-missing-evidence-blocked.png`，记录 `demo/missing-evidence-case/live-output/BLOCKED-record.md`；Worker 未落盘 JSON，已在记录中如实注明）。
+- 异常流程（缺证据 BLOCKED 链路）：**live 完成并补齐机器可读产物**（2026-08-16，`evidence/live-17-missing-evidence-packet.json` + Manager 停止 + 未调用设计/审计；原始截图 `evidence/live-09-missing-evidence-blocked.png`，脱敏重试记录 `evidence/live-20-missing-evidence-team-room-transcript.md`）。
 - 确定性参考实现（deterministic-output）与 fixture replay 输出保留作为对照基线与可复现路径。
 
 ## 5. 恢复正常流程 live 的通过条件

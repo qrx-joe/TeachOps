@@ -1,0 +1,131 @@
+{
+  "evidence_packet_id": "normal-case-ep-v1",
+  "case_id": "normal-case",
+  "curriculum_items": [
+    {
+      "evidence_id": "CUR-01",
+      "type": "excerpt",
+      "content": "会用数学的眼光观察现实世界，会用数学的思维思考现实世界，会用数学的语言表达现实世界。",
+      "source_ref": "《义务教育数学课程标准（2022 年版）》课程理念部分",
+      "grade_band": "第二学段（3～4 年级）",
+      "mapped_learner_data": ["O-01"]
+    },
+    {
+      "evidence_id": "CUR-02",
+      "type": "excerpt",
+      "content": "能结合具体情境，初步认识分数，并能比较两个同分母分数的大小，会读、写分数。",
+      "source_ref": "《义务教育数学课程标准（2022 年版）》第二学段"数与运算"内容要求",
+      "grade_band": "第二学段（3～4 年级）",
+      "mapped_learner_data": ["M-01", "M-02", "PK-01", "PK-02"]
+    },
+    {
+      "evidence_id": "CUR-03",
+      "type": "paraphrase",
+      "content": "课标要求学生能在真实情境中理解数与运算的意义，在活动中发展数感、运算能力和初步的推理意识。",
+      "source_ref": "《义务教育数学课程标准（2022 年版）》第二学段"数与运算"学业要求（转述）",
+      "grade_band": "第二学段（3～4 年级）",
+      "mapped_learner_data": ["PK-01", "PK-02", "M-01", "M-02", "O-01"]
+    }
+  ],
+  "learner_profile": {
+    "grade": "三年级",
+    "class_size": 42,
+    "prior_knowledge": [
+      {
+        "id": "PK-01",
+        "topic": "平均分（整数分物）",
+        "mastery_rate": 0.88,
+        "source": "合成单元前测"
+      },
+      {
+        "id": "PK-02",
+        "topic": "整数读写与大小比较",
+        "mastery_rate": 0.92,
+        "source": "合成单元前测"
+      }
+    ],
+    "misconceptions": [
+      {
+        "id": "M-01",
+        "pattern": "认为分母越大分数越大（如认为 1/8 > 1/2，因为 8 > 2）",
+        "observed_frequency": "17/42",
+        "severity_rank": 1
+      },
+      {
+        "id": "M-02",
+        "pattern": "未平均分也用分数表示（如把没有均分的圆也涂色称为 1/2）",
+        "observed_frequency": "9/42",
+        "severity_rank": 2
+      }
+    ],
+    "observation_notes": [
+      {
+        "id": "O-01",
+        "note": "合成教学观察记录：三年级学生连续专注时长约 15-20 分钟，长时讲授后参与度明显下降"
+      }
+    ]
+  },
+  "cross_map": [
+    {
+      "evidence_id": "CUR-01",
+      "learner_item_id": "O-01",
+      "relationship": "informs",
+      "rationale": "核心素养'三会'导向提示教学设计需避免长时讲授，应通过活动化、情境化方式让学生在观察、思考、表达中发展素养，契合学生专注时长有限的特点。"
+    },
+    {
+      "evidence_id": "CUR-02",
+      "learner_item_id": "M-01",
+      "relationship": "addresses",
+      "rationale": "课标要求'初步认识分数'并'比较同分母分数大小'，直接对应学生将整数大小比较错误迁移到分数的 misconceptions（M-01），需在教学中重点突破。"
+    },
+    {
+      "evidence_id": "CUR-02",
+      "learner_item_id": "M-02",
+      "relationship": "addresses",
+      "rationale": "课标要求'初步认识分数'，隐含'平均分'是分数概念的前提，直接对应未理解'平均分'而误用分数的 misconceptions（M-02）。"
+    },
+    {
+      "evidence_id": "CUR-02",
+      "learner_item_id": "PK-01",
+      "relationship": "builds_on",
+      "rationale": "分数的初步认识建立在整数平均分概念之上（PK-01 掌握率 88%），需先激活先备知识再引入新概念。"
+    },
+    {
+      "evidence_id": "CUR-02",
+      "learner_item_id": "PK-02",
+      "relationship": "builds_on",
+      "rationale": "分数读写与大小比较以整数读写与比较为基础（PK-02 掌握率 92%），高掌握率为新概念学习提供良好起点。"
+    },
+    {
+      "evidence_id": "CUR-03",
+      "learner_item_id": "PK-01",
+      "relationship": "informs",
+      "rationale": "学业要求'在真实情境中理解数与运算的意义'需要以平均分概念（PK-01）为情境锚点。"
+    },
+    {
+      "evidence_id": "CUR-03",
+      "learner_item_id": "PK-02",
+      "relationship": "informs",
+      "rationale": "发展'数感、运算能力'以整数读写与比较（PK-02）为基础能力。"
+    },
+    {
+      "evidence_id": "CUR-03",
+      "learner_item_id": "M-01",
+      "relationship": "informs",
+      "rationale": "'初步的推理意识'培养需要针对 M-01 中的错误推理模式进行纠正，引导学生建立正确的分数大小比较推理逻辑。"
+    },
+    {
+      "evidence_id": "CUR-03",
+      "learner_item_id": "M-02",
+      "relationship": "informs",
+      "rationale": "'在活动中发展数感'需要帮助学生建立分数与'平均分'的正确关联，纠正 M-02 中的概念误用。"
+    },
+    {
+      "evidence_id": "CUR-03",
+      "learner_item_id": "O-01",
+      "relationship": "informs",
+      "rationale": "'在活动中发展'提示教学方式应以活动为主而非长时讲授，与观察记录中学生专注时长有限（15-20 分钟）一致。"
+    }
+  ],
+  "built_at": "2026-08-16T05:50:00Z"
+}
