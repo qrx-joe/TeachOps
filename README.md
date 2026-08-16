@@ -54,7 +54,8 @@ demo/
 - `live` 环境核验：Docker Desktop 4.71.0、Engine 29.4.1 可用。
 - AgentTeams 烟雾测试：**已通过（live，2026-08-15）**。AgentTeams stable v1.1.2 完成本机安装（含 main 安装器与 v1.1.2 镜像之间五处版本错位的修复，见核验文档），烟雾测试六项——Docker、容器健康、Element Web 登录、Manager 回复、Worker 收发、Qwen 调用——全部真实通过；正式团队（manager/evidence/design/audit 四 Agent）在线。
 - **正常流程已 live 完成（2026-08-16）**：四 Agent 在 Element Web 房间真实协作，产出证据包 → 修订稿+修订说明 → 审计报告（R-003 FAIL/R-005 WARN 的真实发现）→ 导师附条件批准（真人决定），四产物存 `demo/normal-case/live-output/`（登记于运行证据索引第 14 项）。
-- 证据边界：异常流程（缺证据 BLOCKED 链路）尚未 live 运行，仍按 `fixture replay` 呈现；确定性参考实现作为对照基线保留。
+- **异常流程已 live 完成（2026-08-16）**：缺课标输入下 teachops-evidence 正确返回 BLOCKED（E_INPUT_MISSING + 缺失清单 + 补证要求），Manager 停止、design/audit 未被调用；截图与记录见 `evidence/live-09-missing-evidence-blocked.png`、`demo/missing-evidence-case/live-output/BLOCKED-record.md`。
+- 证据边界：确定性参考实现与 fixture replay 输出保留作为对照基线与可复现路径；全部 live 证据以 [`docs/运行证据索引.md`](docs/运行证据索引.md) 为唯一事实源。
 
 详细命令与证据边界见 [`docs/agentteams-可用性核验.md`](docs/agentteams-可用性核验.md) 与 [`docs/运行证据索引.md`](docs/运行证据索引.md)。
 

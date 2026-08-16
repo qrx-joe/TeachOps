@@ -42,7 +42,7 @@
 
 - 烟雾测试（第 2 节六项）：**live**（2026-08-15）。
 - 正常课例流程（Evidence → Design → Audit 四产物 + 导师审批）：**live 完成**（2026-08-16，产物在 `demo/normal-case/live-output/`）。
-- 异常流程（缺证据 BLOCKED 链路）：未 live 运行，仍按 `fixture replay` 呈现（`demo/missing-evidence-case/expected-output/`）。
+- 异常流程（缺证据 BLOCKED 链路）：**live 完成**（2026-08-16，BLOCKED 报告 + Manager 停止 + 未调用设计/审计；截图 `evidence/live-09-missing-evidence-blocked.png`，记录 `demo/missing-evidence-case/live-output/BLOCKED-record.md`；Worker 未落盘 JSON，已在记录中如实注明）。
 - 确定性参考实现（deterministic-output）与 fixture replay 输出保留作为对照基线与可复现路径。
 
 ## 5. 恢复正常流程 live 的通过条件
