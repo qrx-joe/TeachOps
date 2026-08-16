@@ -49,7 +49,7 @@
 - 人工边界：正式通过只能由导师点击，Agent 无发布权
 
 证据：状态流程图（design）。
-截图占位：【live：AgentTeams Team Room 协作记录——步骤 9 运行后补】
+已嵌入 live 截图：AgentTeams Team Room 协作记录（`evidence/live-05-normal-case-kickoff.png`，2026-08-16 运行，对应证据索引 L4）。
 
 ## P5 四个 Agent Identity
 

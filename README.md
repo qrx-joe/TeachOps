@@ -123,6 +123,7 @@ uv run python -m unittest discover -s tests -v
 ├─ agents/          # 四个 Agent Identity
 ├─ skills/          # 三个 Skill contracts（含 JSON Schema 与正反样例）
 ├─ demo/            # 正常 + 缺证据两套输入与期望输出
+├─ eval/            # 评测集与可复现评测 harness（18 条合成样例，见 eval/README.md）
 ├─ src/             # 本地确定性 Evidence / 修订 / 审计流水线
 ├─ tests/           # 正常与 BLOCKED 路径自动化测试
 ├─ scripts/         # CLI、PPT/PDF 与提交预检脚本
@@ -137,7 +138,7 @@ uv run python -m unittest discover -s tests -v
 
 - [`docs/任务与协作记录.md`](docs/任务与协作记录.md)：Question、To do、Next to do、人与 AI 的关键协作决定、建议、不确定性与遗漏项。
 - [`docs/技术选型与工程规范.md`](docs/技术选型与工程规范.md)：当前实现与目标架构边界、同类框架参考、行业规范、扩展维护、测试和详细注释规则。
-- [`研序_TeachOps_技术实施与工程规范_V1.1.docx`](研序_TeachOps_技术实施与工程规范_V1.1.docx)：完整目标架构与工程规范正文；其中未落地部分仍属于 `design`。
+- 研序 TeachOps 技术实施与工程规范 V1.1（内部 docx，未随公开仓库分发）：完整目标架构与工程规范正文；其中未落地部分仍属于 `design`。
 
 ## 7. 初赛不做（复赛计划）
 

@@ -42,3 +42,6 @@ desktop.ini
 .vscode/
 *.swp
 .pptx_preview/
+
+# ===== Demo 视频工程（本地产物，不入库） =====
+demo-video/
