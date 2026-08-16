@@ -13,6 +13,9 @@ credentials/
 submission/official-templates/
 submission/receipts/
 
+# 提交附件 zip（内容=git archive HEAD，可随时重新生成，不入库）
+submission/*.zip
+
 # 原始截图先放这里，去除个人信息并标注证据类型后再移入 evidence/
 evidence/private/
 
