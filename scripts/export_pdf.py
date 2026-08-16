@@ -23,9 +23,11 @@ def export(pptx: str, pdf: str) -> None:
         "$app.Quit()\n"
     )
     enc = base64.b64encode(ps.encode("utf-16-le")).decode()
+    # PowerShell 在本机按 GBK 输出中文，用 errors="replace" 避免
+    # text=True 的 UTF-8 解码在线程里抛 UnicodeDecodeError。
     r = subprocess.run(
         ["powershell.exe", "-NoProfile", "-EncodedCommand", enc],
-        capture_output=True, text=True, timeout=180,
+        capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=180,
     )
     if r.returncode != 0 or not os.path.exists(pdf):
         print("EXPORT FAILED", r.returncode)
