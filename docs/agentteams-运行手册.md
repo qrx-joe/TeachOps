@@ -40,7 +40,7 @@
 - 验证：Manager 能分别 @ 三个 Worker；每个 Worker 能读到自己的 Identity 与 Skill 契约。
 - 产出记录：团队配置截图、成员截图、角色-Skill 映射确认。
 
-## 步骤 9 正常流程（时间盒 2 小时，**最多 2 轮**）
+## 步骤 9 正常流程（时间盒 2 小时，**最多 2 轮**）✅ 已完成（2026-08-16，live）
 
 给 Manager 的首条消息模板（引用文件而非粘贴正文）：
 
@@ -63,6 +63,8 @@
 4. Manager 请导师决定 → 用户回复批准/驳回（记录 review_decision）
 
 **停止条件**：流程与边界正确即停止，不追求更好文案。第 2 轮结束仍不完整 → 冻结已获得的部分产物，其余用 fixture 补齐并如实标注。
+
+**2026-08-16 执行结果（live，第 1 轮完成）**：四产物齐备并存于 `demo/normal-case/live-output/`——evidence-packet.json（CUR-01~03 + 10 条交叉映射）、lesson-revised.md + design-review-notes.md（四类问题修订清单）、audit-report.json（R-001/002/004 PASS，R-003 FAIL：M-01 错误模式未显式处理，R-005 WARN：40 分钟贴上限）、review-decision.md（导师附条件批准：M-01 处理环节实施前补入环节三）。live 审计比 fixture 判定更严格（R-003 FAIL），证明审计环节真实独立。执行过程中修复的协作链路问题（Worker 侧任务文件分发依赖 shared/tasks/ 目录与人工同步触发）记录于任务协作记录。
 
 ## 步骤 10 缺证据异常流程（时间盒 60 分钟）
 

@@ -40,17 +40,19 @@
 
 ## 4. 当前证据边界
 
-- 烟雾测试（第 2 节六项）：**live**。
-- 正常课例流程（Evidence → Design → Audit 四产物 + 导师审批）：尚未在 AgentTeams 上运行，仓库内正常流程产物仍为 `fixture replay`（`demo/normal-case/fixture-replay-output/`），README 与 PPT 相应标注保持不变，待 live 流程完成后替换。
+- 烟雾测试（第 2 节六项）：**live**（2026-08-15）。
+- 正常课例流程（Evidence → Design → Audit 四产物 + 导师审批）：**live 完成**（2026-08-16，产物在 `demo/normal-case/live-output/`）。
+- 异常流程（缺证据 BLOCKED 链路）：未 live 运行，仍按 `fixture replay` 呈现（`demo/missing-evidence-case/expected-output/`）。
+- 确定性参考实现（deterministic-output）与 fixture replay 输出保留作为对照基线与可复现路径。
 
 ## 5. 恢复正常流程 live 的通过条件
 
-1. `docker version` 同时显示 Client 与 Server。✅（已满足）
-2. AgentTeams stable v1.1.2 容器启动且健康。✅（已满足）
-3. 本地 Element Web 可登录。✅（已满足）
-4. Manager 回复最小消息。✅（已满足）
-5. 一个 Worker 成功接收并回传任务。✅（已满足）
-6. Qwen 最小调用成功。✅（已满足）
-7. 正常课例依次产生四个文件，并由用户在 Team Room 作出审批决定。⏳（待运行）
+1. `docker version` 同时显示 Client 与 Server。✅（2026-08-15 满足）
+2. AgentTeams stable v1.1.2 容器启动且健康。✅（2026-08-15 满足）
+3. 本地 Element Web 可登录。✅（2026-08-15 满足）
+4. Manager 回复最小消息。✅（2026-08-15 满足）
+5. 一个 Worker 成功接收并回传任务。✅（2026-08-15 满足）
+6. Qwen 最小调用成功。✅（2026-08-15 满足）
+7. 正常课例依次产生四个文件，并由用户在 Team Room 作出审批决定。✅（2026-08-16 完成，产物见 `demo/normal-case/live-output/`，登记于运行证据索引第 14 项）
 
-第 7 项完成前，正常流程在《运行证据索引》中保持 `fixture replay` 标注。
+正常流程七项全部满足。异常流程（缺证据 BLOCKED 链路）仍为 fixture replay，见运行证据索引 L5。
