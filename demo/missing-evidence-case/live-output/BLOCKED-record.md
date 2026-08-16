@@ -40,3 +40,10 @@ Manager 收到 BLOCKED 汇报后确认停止，未分派 teachops-design / teach
 
 - Worker 在房间中给出完整 BLOCKED 报告，但**未将 evidence-packet.json 写入共享存储**（后续要求补写也未落盘）；本记录由房间汇报原文整理，截图为原始证据。
 - fixture 的 `expected-output/evidence_packet.json` 保留为该场景的结构化参考基线。
+
+## 证据边界（评审提示）
+
+- 本场景的 live 运行**未产出机器可读的 BLOCKED evidence-packet.json**（Worker 汇报后未写 MinIO）。因此本目录只有 `BLOCKED-record.md`，没有落盘的 live 包。
+- 可核实的 live 依据：`evidence/live-09-missing-evidence-blocked.png`（截图）+ 本记录的房间汇报原文。
+- 结构化基线（**非本次 live 落盘产物**，供对照与机器校验）：`demo/missing-evidence-case/expected-output/evidence_packet.json`（fixture）与 `demo/missing-evidence-case/deterministic-output/evidence_packet.json`（确定性实现，`status=BLOCKED` + `missing_items`）。
+- 评审如需机器可读证据，应使用上述 fixture/确定性基线，并知悉其来自本地确定性实现而非本次 live 落盘。

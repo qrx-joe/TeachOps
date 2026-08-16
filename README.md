@@ -110,7 +110,7 @@ uv run python -m unittest discover -s tests -v
 - `fixture replay`：`demo/*/expected-output/` 中的固定期望输出回放
 - `design`：方案设计，尚未实现
 
-当前仓库中 Agent Identity、Skill 契约、样例与 expected-output 为 design / fixture replay；烟雾测试（六项）与团队配置为 live（2026-08-15）。正常课例流程的 live 证据（四产物 + 导师审批）尚待运行，完成后必须按运行证据索引登记。
+当前仓库中 Agent Identity、Skill 契约、样例与 expected-output 为 design / fixture replay；烟雾测试、团队配置、正常流程（四产物 + 导师审批）与异常流程（BLOCKED + Manager 停止）均已 live 完成并登记于[运行证据索引](docs/运行证据索引.md)（2026-08-15/16）。确定性实现与 fixture 作为对照基线保留。
 
 ### API Key 安全
 

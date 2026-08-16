@@ -55,4 +55,4 @@
 6. Qwen 最小调用成功。✅（2026-08-15 满足）
 7. 正常课例依次产生四个文件，并由用户在 Team Room 作出审批决定。✅（2026-08-16 完成，产物见 `demo/normal-case/live-output/`，登记于运行证据索引第 14 项）
 
-正常流程七项全部满足。异常流程（缺证据 BLOCKED 链路）仍为 fixture replay，见运行证据索引 L5。
+正常流程七项全部满足。异常流程（缺证据 BLOCKED 链路）已 live 完成（2026-08-16），见运行证据索引 L5 与 `demo/missing-evidence-case/live-output/BLOCKED-record.md`。

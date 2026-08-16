@@ -2,7 +2,8 @@
 
 > 状态：2026-08-16 环境已就绪；契约化 task-spec 已写入 manager 工作区
 > `C:\Users\14536\agentteams-manager\agentteams\agentteams-storage\shared\`（仓库外，不入 Git）。
-> 本文件是 live 运行的仓库侧执行卡：正式契约以 `skills/*/contract.md` 为准，本页只提供可复现的操作步骤与消息模板。
+> **LIVE-001 / LIVE-002 均已 live 完成（2026-08-16）**：正常流程四产物 + 导师审批（L4）与异常流程 BLOCKED（L5）证据见 `docs/运行证据索引.md`；本页保留为执行卡与消息模板存档，清单状态已更新为完成。
+> 正式契约以 `skills/*/contract.md` 为准，本页只提供可复现的操作步骤与消息模板。
 
 ## 0. 前置核对（已完成，只读核验 2026-08-16）
 
@@ -45,12 +46,13 @@ Audit 完成后，把 WARN/FAIL 与产物引用转交给我（导师），由我
 
 | 项 | 位置 | 状态 |
 | --- | --- | --- |
-| Team Room 四 Agent 成员/角色配置截图 | `evidence/private/`（脱敏后移入 `evidence/`） | 待截图 |
-| Manager 任务拆解与分派记录 | 截图 或 房间消息记录 | 待运行 |
-| Evidence/Design/Audit 消息轨迹 | 截图（脱敏） | 待运行 |
-| `evidence_packet.json` / `revision.md` / `audit_report.json`（live 产物） | 复制到 `evidence/live-XX-*` | 待运行 |
-| 人工审批决定 + 绑定 `report_id` | `evidence/` | 待运行 |
-| 运行时间、模型别名、结果状态、失败/重试说明 | 写入 `docs/运行证据索引.md` L4/L5 | 待运行 |
+| Team Room 四 Agent 成员/角色配置截图 | `evidence/private/`（脱敏后移入 `evidence/`） | ✅ 已归档（`evidence/live-01..04`） |
+| Manager 任务拆解与分派记录 | 截图 或 房间消息记录 | ✅ 已归档（`evidence/live-05/06`） |
+| Evidence/Design/Audit 消息轨迹 | 截图（脱敏） | ✅ 已归档（`evidence/live-05/06/07`） |
+| 正常流程四产物（live） | `demo/normal-case/live-output/` | ✅ 已归档（索引第 14 项） |
+| 人工审批决定 + 绑定 `report_id` | `evidence/` | ✅ 已归档（`evidence/live-08` + `review-decision.md`） |
+| 异常流程 BLOCKED 记录 | `demo/missing-evidence-case/live-output/BLOCKED-record.md` | ✅ 已归档（索引 L5，`evidence/live-09`） |
+| 运行时间、模型别名、结果状态、失败/重试说明 | 写入 `docs/运行证据索引.md` L4/L5 | ✅ 已登记 |
 
 ## 4. 停止线（live 证据不得伪造）
 
