@@ -14,34 +14,44 @@
 | R-004 | 课标映射 | 每条目标映射到可验证的 CUR 课标条目 |
 | R-005 | 课时结构完整 | 各环节标时长，总时长 ≤ `max_total_minutes`（40） |
 
-## 2. 覆盖矩阵要求（每条 P0 规则 ≥3 正例 + 3 反例 + 1 边界/NA）
+## 2. 覆盖矩阵（已实现，2026-08-16 经 `run_eval.py` 验证全部通过）
 
-| rule_id | 正例（预期 PASS） | 反例（预期 FAIL/WARN） | 边界/NA |
+| rule_id | 正例（PASS） | 反例（FAIL/WARN） | 边界/NA |
 | --- | --- | --- | --- |
-| R-001 | S-01, S-04, S-05 | S-02, S-08, S-11 | S-12(NA) |
-| R-002 | S-01, S-04, S-06 | S-03, S-09, S-11 | S-10(NA) |
-| R-003 | S-01, S-05, S-06 | S-04, S-08, S-09 | S-07(NA:无学情) |
-| R-004 | S-01, S-02, S-06 | S-05, S-08, S-11 | S-10(NA) |
-| R-005 | S-01, S-02, S-03 | S-06, S-09, S-11 | S-07(边界:恰 40 分钟) |
+| R-001 | S-01, S-04, S-05 | S-02, S-08, S-13 | 待审计器扩展（E_RULE_NA） |
+| R-002 | S-01, S-04, S-06 | S-03, S-12, S-14 | 待审计器扩展 |
+| R-003 | S-01, S-05, S-06 | S-04, S-15, S-16 | 待审计器扩展 |
+| R-004 | S-01, S-02, S-06 | S-05, S-08, S-17 | 待审计器扩展 |
+| R-005 | S-01, S-02, S-03 | S-06, S-18, S-19 | S-07（恰 40 分钟，PASS） |
 
-## 3. 样例登记（≥10；来源必须是 public / authorized / synthetic）
+> R-001..R-004 的边界/NA 例依赖审计器实现 `E_RULE_NA`（规则不适用）与更细判定，当前确定性审计对这些规则是二值的，故暂以"待扩展"标注，不虚标样例。
 
-| sample_id | 来源类型 | 内容一句话 | 预期结果 | 污染类型 |
+## 3. 样例登记（已实现 18 条；来源全部为 synthetic）
+
+| sample_id | 来源 | 内容一句话 | 预期结果 | 污染类型 |
 | --- | --- | --- | --- | --- |
-| S-01 | synthetic | 正常全通过课例 | READY + 全 PASS | 无 |
+| S-01 | synthetic | 正常全通过（总时长 38 分钟） | 全 PASS | 无 |
 | S-02 | synthetic | 目标 3 无评价任务 | R-001 FAIL | 无 |
-| S-03 | synthetic | 关键理由无 evidence_id | R-002 FAIL | 无 |
-| S-04 | synthetic | 未响应最高频误解 | R-003 FAIL | 无 |
-| S-05 | synthetic | 目标未映射课标条目 | R-004 FAIL | 无 |
-| S-06 | synthetic | 总时长 45 分钟 | R-005 WARN/FAIL | 无 |
-| S-07 | synthetic | 总时长恰 40 分钟 | R-005 PASS(边界) | 边界 |
-| S-08 | synthetic | 目标-评价脱节 + 无课标映射 | R-001/R-004 FAIL | 无 |
+| S-03 | synthetic | 关键理由 1 无证据引用 | R-002 FAIL | 无 |
+| S-04 | synthetic | 未响应最高频误解 M-01 | R-003 FAIL | 无 |
+| S-05 | synthetic | 目标 1 未映射课标 | R-004 FAIL | 无 |
+| S-06 | synthetic | 总时长 45 分钟 | R-005 WARN | 无 |
+| S-07 | synthetic | 总时长恰 40 分钟 | R-005 PASS（边界） | 边界 |
+| S-08 | synthetic | 目标 3 无任务且无课标映射 | R-001/R-004 FAIL | 无 |
 | S-09 | synthetic | 缺 curriculum-source.md | BLOCKED(E_INPUT_MISSING) | 缺课标 |
-| S-10 | synthetic | 学情 JSON 缺 synthetic/字段错误 | E_DATA_QUALITY | 错误字段 |
-| S-11 | synthetic | 两条规则互相冲突 | 冲突标记 + needs_human_decision | 冲突规则 |
-| S-12 | public/authorized | 引用不存在的 evidence_id | R-002/R-004 WARN(引用不可验证) | 无来源资源 |
+| S-10 | synthetic | 学情缺 synthetic 标记 | E_DATA_QUALITY | 错误字段 |
+| S-11 | synthetic | 两条规则冲突 | 冲突标记 + needs_human_decision | 冲突规则（**待审计器扩展，未实现**） |
+| S-12 | synthetic | 理由引用不存在的 EV-999 | R-002 WARN | 无来源资源 |
+| S-13 | synthetic | 目标 2 无评价任务（变体） | R-001 FAIL | 无 |
+| S-14 | synthetic | 关键理由 2 无证据引用（变体） | R-002 FAIL | 无 |
+| S-15 | synthetic | 响应标记误解 ID 错误（变体） | R-003 FAIL | 无 |
+| S-16 | synthetic | 响应标记证据 ID 错误（变体） | R-003 FAIL | 无 |
+| S-17 | synthetic | 目标 2 未映射课标（变体） | R-004 FAIL | 无 |
+| S-18 | synthetic | 总时长 41 分钟（边界超） | R-005 WARN | 边界 |
+| S-19 | synthetic | 总时长 50 分钟（明显超） | R-005 WARN | 无 |
 
 > 模型超时不入样例，由运行层按 `E_SKILL_TIMEOUT` 记录并标记"超时未检"。
+> 冲突规则样例（S-11）需在审计器实现 `E_RULE_CONFLICT` 检测后补入。
 
 ## 4. 标注 schema（≥1 名导师标注）
 
